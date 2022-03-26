@@ -11,3 +11,37 @@
     margin-top: 30px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
+.selected-container
+{
+    margin-top: 30px;
+    background-color: rgb(216, 210, 210);
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 10px;
+    height: max-content;
+    position: sticky;
+    top: 50px;
+}
+.choose-1-button
+{
+    padding: 5px;
+    font-weight: 600;
+    color: green;
+    border-radius: 5px;
+    border-color: green;
+}
+.choose-again
+{
+    padding: 5px;
+    font-weight: 600;
+    color: blueviolet;
+    border-radius: 5px;
+    border-color: blueviolet;
+    margin-top: 3px;
+    margin-bottom: 30px;
+}
+@media screen and (max-width:800px) {
+    .selected-container{
+    width: 250px;
+   }
+}

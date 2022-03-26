@@ -1,0 +1,18 @@
+.select-item img
+{
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    padding-right: 10px;
+}
+.select-item
+{
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid green;
+    padding-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: aqua;
+}
