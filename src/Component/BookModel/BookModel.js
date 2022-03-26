@@ -17,7 +17,7 @@ const BookModel = ({selected}) => {
         return (
           <div>
             <div className="select-item">
-              {/* <img src={selected[x].img} alt="" /> */}
+              <img src={selected[x].img} alt="" />
               <h3>{selected[x].name}</h3>
             </div>
           </div>

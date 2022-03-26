@@ -29,11 +29,29 @@ const BookShop = () => {
     fetch("data.json")
       .then((res) => res.json())
       .then((data) => setBooks(data));
-  }, []);
+  },[]);
 
   const handleAddToCart = (Item) => {
-    const newCart = [...selected, Item];
-    setSelected(newCart);
+    let newCart;    
+
+    if(selected.length===0)
+    {
+      newCart = [...selected, Item];
+      setSelected(newCart);
+    }
+    else if(selected.find(o=>o.id===Item.id))
+    {
+      alert("This Book is already added.");
+    }
+    else if(selected.length<4)
+    {
+      newCart = [...selected, Item];
+      setSelected(newCart);
+    }
+    else
+    {
+      alert("You can't add more than 4 item");
+    }
   };
 
   const toggleModal = () => {
@@ -54,41 +72,44 @@ const BookShop = () => {
   };
 
   return (
-    <div className="bookshop-container">
-      <div className="bookcart-container">
-        {books.map((book) => (
-          <BookCart
-            book={book}
-            key={book.id}
-            handleAddToCart={handleAddToCart}
-          ></BookCart>
-        ))}
-      </div>
-      <div className="selected-container">
-        <h2>Selected Book Item</h2>
-        {selected.map((select) => (
-          <SelectedBook select={select} key={select.id}></SelectedBook>
-        ))}
-        <button onClick={toggleModal} className="choose-1-button">
-          CHOOSE 1 FOR ME
-        </button>
-        <button onClick={resetItem} className="choose-again">
-          {" "}
-          RESET ITEM
-        </button>
-      </div>
+    <div>
+      <h2 className="choose-book">Choose 4 Books</h2>
+      <div className="bookshop-container">
+        <div id="bookcart" className="bookcart-container">
+          {books.map((book) => (
+            <BookCart
+              book={book}
+              key={book.id}
+              handleAddToCart={handleAddToCart}
+            ></BookCart>
+          ))}
+        </div>
+        <div id="selected-cart" className="selected-container">
+          <h2>Selected Book Item</h2>
+          {selected.map((select) => (
+            <SelectedBook select={select} key={select.id}></SelectedBook>
+          ))}
+          <button onClick={toggleModal} className="choose-1-button">
+            CHOOSE 1 FOR ME
+          </button>
+          <button onClick={resetItem} className="choose-again">
+            {" "}
+            RESET ITEM
+          </button>
+        </div>
 
-      <Modal isOpen={modal} onRequestClose={closeModal} style={customStyles}>
-        <button className="modal-close-button" onClick={closeModal}>
-          <CgCloseR size={25} />
-        </button>
-        {selected.length === 0 && (
-          <div className="cart-warning">
-            <p> Select Book Item Empty </p>
-          </div>
-        )}
-        <BookModel key={selected.id} selected={selected}></BookModel>
-      </Modal>
+        <Modal isOpen={modal} onRequestClose={closeModal} style={customStyles}>
+          <button className="modal-close-button" onClick={closeModal}>
+            <CgCloseR size={25} />
+          </button>
+          {selected.length === 0 && (
+            <div className="cart-warning">
+              <p> Select Book Item Empty </p>
+            </div>
+          )}
+          <BookModel key={selected.id} selected={selected}></BookModel>
+        </Modal>
+      </div>
     </div>
   );
 };

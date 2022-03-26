@@ -11,6 +11,11 @@
     margin-top: 30px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
+.choose-book
+{
+    text-align: center;
+    color:brown;
+}
 .selected-container
 {
     margin-top: 30px;
@@ -41,7 +46,20 @@
     margin-bottom: 30px;
 }
 @media screen and (max-width:800px) {
-    .selected-container{
+   .selected-container{
     width: 250px;
    }
+   .bookshop-container
+   {
+    display: grid;
+    grid-template-columns:1fr;
+  }
+  #bookcart
+  {
+      order: 2;
+  }
+  #selected-cart
+  {
+      order: 1;
+  }
 }
