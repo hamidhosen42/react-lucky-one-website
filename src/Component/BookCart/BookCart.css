@@ -5,7 +5,11 @@
     border: 1px solid #95A0A7;
     border-radius: 8px;
     position: relative;
-     box-shadow: 5px 5px 5px 5px#888888;
+    box-shadow: 5px 5px 5px 5px#888888;
+}
+.product:hover
+{
+    background-color: aqua;
 }
 .product img{
     width: 285px;
