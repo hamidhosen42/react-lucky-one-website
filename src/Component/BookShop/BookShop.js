@@ -11,19 +11,19 @@ const BookShop = () => {
   const [selected, setSelected] = useState([]);
   const [modal, setModal] = useState(false);
 
-    const customStyles = {
-      content: {
-        top: "50%",
-        left: "50%",
-        right: "auto",
-        bottom: "auto",
-        marginRight: "-50%",
-        transform: "translate(-50%, -50%)",
-        height: "200px",
-        width: "300px",
-        overflow: "auto",
-      },
-    };
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      height: "130px",
+      width: "300px",
+      overflow: "auto",
+    },
+  };
 
   useEffect(() => {
     fetch("data.json")
@@ -36,15 +36,22 @@ const BookShop = () => {
     setSelected(newCart);
   };
 
-    const toggleModal = () => {
-      setModal(true);
-    };
+  const toggleModal = () => {
+    setModal(true);
+  };
 
-    const closeModal = () => {
-      setModal(false);
-    };
+  const closeModal = () => {
+    setModal(false);
+  };
 
-    console.log(selected.length);
+  const resetItem = () => {
+    if (selected.length === 0) {
+      alert("Select Book Item is empty");
+    } else {
+      const set = setSelected([]);
+      return set;
+    }
+  };
 
   return (
     <div className="bookshop-container">
@@ -65,7 +72,10 @@ const BookShop = () => {
         <button onClick={toggleModal} className="choose-1-button">
           CHOOSE 1 FOR ME
         </button>
-        <button className="choose-again">CHOOSE AGAIN</button>
+        <button onClick={resetItem} className="choose-again">
+          {" "}
+          RESET ITEM
+        </button>
       </div>
 
       <Modal isOpen={modal} onRequestClose={closeModal} style={customStyles}>
