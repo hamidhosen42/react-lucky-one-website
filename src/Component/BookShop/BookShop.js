@@ -2,11 +2,28 @@ import React, { useEffect, useState } from "react";
 import BookCart from "../BookCart/BookCart";
 import SelectedBook from "../SelectedBook/SelectedBook";
 import "./BookShop.css";
+import Modal from "react-modal";
+import { CgCloseR } from "react-icons/cg";
+import BookModel from "../BookModel/BookModel";
 
 const BookShop = () => {
   const [books, setBooks] = useState([]);
   const [selected, setSelected] = useState([]);
   const [modal, setModal] = useState(false);
+
+    const customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
+        height: "200px",
+        width: "300px",
+        overflow: "auto",
+      },
+    };
 
   useEffect(() => {
     fetch("data.json")
@@ -18,12 +35,16 @@ const BookShop = () => {
     const newCart = [...selected, Item];
     setSelected(newCart);
   };
-  console.log(selected);
 
-  const delateItem=(selected)=>{
-    selected=[];
-    console.log(selected);
-  }
+    const toggleModal = () => {
+      setModal(true);
+    };
+
+    const closeModal = () => {
+      setModal(false);
+    };
+
+    console.log(selected.length);
 
   return (
     <div className="bookshop-container">
@@ -41,9 +62,23 @@ const BookShop = () => {
         {selected.map((select) => (
           <SelectedBook select={select} key={select.id}></SelectedBook>
         ))}
-        <button className="choose-1-button">CHOOSE 1 FOR ME</button>
-        <button onClick={()=>delateItem(selected)} className="choose-again">CHOOSE AGAIN</button>
+        <button onClick={toggleModal} className="choose-1-button">
+          CHOOSE 1 FOR ME
+        </button>
+        <button className="choose-again">CHOOSE AGAIN</button>
       </div>
+
+      <Modal isOpen={modal} onRequestClose={closeModal} style={customStyles}>
+        <button className="modal-close-button" onClick={closeModal}>
+          <CgCloseR size={25} />
+        </button>
+        {selected.length === 0 && (
+          <div className="cart-warning">
+            <p> Select Book Item Empty </p>
+          </div>
+        )}
+        <BookModel key={selected.id} selected={selected}></BookModel>
+      </Modal>
     </div>
   );
 };
